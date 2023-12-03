@@ -61,8 +61,23 @@ const NewStudentView = (props) => {
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Email: </label>
+            <input type="text" name="email" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Image URL: </label>
+            <input type="text" name="imageURL" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
+            <input type="text" name="gpa" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus ID: </label>
+            <input type="text" name="campusid" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
