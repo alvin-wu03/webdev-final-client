@@ -1,12 +1,10 @@
 import Header from './Header';
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudentThunk } from "../../store/thunks";
 import EditStudentView from '../views/EditStudentView';
-import { editStudentThunk } from '../../store/thunks';
+import { editStudentThunk, fetchStudentThunk } from '../../store/thunks';
 
 class EditStudentContainer extends Component {
-    // Get student data from back-end database
     componentDidMount() {
         //getting student ID from url
         this.props.fetchStudent(this.props.match.params.id);
@@ -17,12 +15,10 @@ class EditStudentContainer extends Component {
         this.state = {
             firstname: "",
             lastname: "",
-            campusId: null,
-            redirect: false,
-            redirectId: null
+            campusId: null
         };
     }
-
+    //the student id is undefined
     // Capture input data when it is entered
     handleChange = event => {
         this.setState({
@@ -33,37 +29,33 @@ class EditStudentContainer extends Component {
     // Take action after user click the submit button
     handleSubmit = async event => {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
+        let { student } = this.props;
+        if(true){
+            console.log(student.id)
+        }
 
-        let student = {
+        student = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             campusId: this.state.campusId
         };
 
-        // Add new student in back-end database
-        let newStudent = await this.props.editStudentThunk(student);//NEED TO CHANGE THIS HERE ERERERERERE
-
-        // Update state, and trigger redirect to show the new student
-        this.setState({
-            firstname: "",
-            lastname: "",
-            campusId: null,
-            redirect: true,
-            redirectId: newStudent.id
-        });
+        // Edit student
+        await this.props.editStudent(student);
     }
 
     // Render Student view by passing student data as props to the corresponding View component
     render() {
+        const { student } = this.props;
+
         return (
             <div>
                 <Header />
-                <EditStudentView student={this.props.student} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                <EditStudentView student={student} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
             </div>
         );
     }
 }
-
 
 // The following 2 input arguments are passed to the "connect" function used by "StudentContainer" to connect to Redux Store.  
 // The following 2 input arguments are passed to the "connect" function used by "AllCampusesContainer" component to connect to Redux Store.
