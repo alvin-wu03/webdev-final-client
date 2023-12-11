@@ -2,6 +2,7 @@ import Header from './Header';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import EditStudentView from '../views/EditStudentView';
+import { Redirect } from 'react-router-dom';
 import { editStudentThunk, fetchStudentThunk } from '../../store/thunks';
 
 class EditStudentContainer extends Component {
@@ -13,9 +14,7 @@ class EditStudentContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: "",
-            lastname: "",
-            campusId: null
+            redirect: false
         };
     }
     //the student id is undefined
@@ -30,23 +29,28 @@ class EditStudentContainer extends Component {
     handleSubmit = async event => {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
         let { student } = this.props;
-        if(true){
-            console.log(student.id)
-        }
 
         student = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            campusId: this.state.campusId
+            campusId: this.state.campusId,
+            id: student.id
         };
 
         // Edit student
         await this.props.editStudent(student);
+        this.setState({
+            redirect: true
+        });
     }
 
     // Render Student view by passing student data as props to the corresponding View component
     render() {
         const { student } = this.props;
+
+        if (this.state.redirect) {
+            return (<Redirect to={`/students`} />)
+        }
 
         return (
             <div>
