@@ -1,5 +1,5 @@
 /*==================================================
-NewStudentContainer.js
+NewCampusContainer.js
 
 The Container component is responsible for stateful logic and data fetching, and
 passes data (if any) as props to the corresponding View component.
@@ -38,6 +38,7 @@ class NewCampusContainer extends Component {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
     let campus = {
+        imageURL: this.state.imageURL,
         name: this.state.name,
         address: this.state.address,
         description: this.state.description
