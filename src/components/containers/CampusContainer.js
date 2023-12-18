@@ -8,7 +8,7 @@ If needed, it also defines the component's "connect" function.
 import Header from './Header';
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCampusThunk, deleteCampusThunk, deleteStudentThunk } from "../../store/thunks";
+import { fetchCampusThunk, deleteCampusThunk, editStudentThunk } from "../../store/thunks";
 import { Redirect } from 'react-router-dom';
 
 import { CampusView } from "../views";
@@ -32,8 +32,14 @@ class CampusContainer extends Component {
   }
 
   // deletes a student from a campus
-  deleteStudent = async (studentId) => {
-    await this.props.deleteStudent(studentId);
+  deleteStudent = async (student) => {
+    student = {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        campusId: null,
+        id: student.id
+    };
+    await this.props.deleteStudent(student);
     this.setState({ redirect: false });
     this.props.fetchCampus(this.props.campus.id);
   }
@@ -68,7 +74,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
     deleteCampus: (campusId) => dispatch(deleteCampusThunk(campusId)),
-    deleteStudent: (studentId) => dispatch(deleteStudentThunk(studentId)),
+    deleteStudent: (studentId) => dispatch(editStudentThunk(studentId)),
   };
 };
 

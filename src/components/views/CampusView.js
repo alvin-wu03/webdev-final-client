@@ -26,7 +26,7 @@ const CampusView = (props) => {
               <Link to={`/student/${student.id}`}>
                 <h2>{name}</h2>
               </Link>
-              <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
+              <button onClick={() => deleteStudent(student)}>Delete Student</button>
             </div>
           );
         })
