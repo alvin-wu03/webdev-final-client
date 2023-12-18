@@ -24,7 +24,7 @@ const CampusView = (props) => {
           return (
             <div key={student.id}>
               <Link to={`/student/${student.id}`}>
-                <h2>{name}</h2>
+                <h2>Student: {name}</h2>
               </Link>
               <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
             </div>
@@ -33,6 +33,7 @@ const CampusView = (props) => {
         ):
         (<h3>No students are enrolled at this campus</h3>)
       }
+      <br></br>
       <Link to={{
         pathname: `/newstudent`,
         query: {campus_id}
