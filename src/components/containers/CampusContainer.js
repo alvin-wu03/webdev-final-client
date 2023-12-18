@@ -31,7 +31,7 @@ class CampusContainer extends Component {
     this.setState({ redirect: true });
   }
 
-  // deletes a student from a campus
+  // deletes a student from a campus, does not delete the student from the database
   deleteStudent = async (student) => {
     student = {
         firstname: this.state.firstname,
