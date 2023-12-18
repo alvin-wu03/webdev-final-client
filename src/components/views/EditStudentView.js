@@ -1,6 +1,7 @@
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useEffect } from 'react';
 
 // Create styling for the input form
 const useStyles = makeStyles(() => ({
@@ -30,9 +31,18 @@ const useStyles = makeStyles(() => ({
 
 
 const EditStudentView = (props) => {
-    const { handleChange, handleSubmit } = props;
+    const { handleChange, handleSubmit, campusId } = props;
     const classes = useStyles();
-
+    useEffect(() => {
+        if (campusId && campusId !== null) {
+          handleChange({
+            target: {
+              name: 'campusId',
+              value: campusId.campusId.campus_id,
+            },
+          });
+        }
+      }, [campusId, handleChange]);
     return (
         <div>
             <h1>Edit Student</h1>
@@ -55,7 +65,7 @@ const EditStudentView = (props) => {
                         <br />
 
                         <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Id: </label>
-                        <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
+                        <input type="text" defaultValue={campusId && campusId.campusId.campus_id !== null ? campusId.campusId.campus_id : ''} name="campusId" onChange={(e) => handleChange(e)} />
                         <br />
                         <br />
 

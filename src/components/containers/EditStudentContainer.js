@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import EditStudentView from '../views/EditStudentView';
 import { Redirect } from 'react-router-dom';
+import { useEffect } from 'react';
 import { editStudentThunk, fetchStudentThunk } from '../../store/thunks';
 
 class EditStudentContainer extends Component {
@@ -55,7 +56,7 @@ class EditStudentContainer extends Component {
         return (
             <div>
                 <Header />
-                <EditStudentView student={student} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                <EditStudentView campusId = {this.props.location.query} student={student} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
             </div>
         );
     }

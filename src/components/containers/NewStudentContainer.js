@@ -36,14 +36,13 @@ class NewStudentContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
-
     let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         email: this.state.email,
         imageURL: this.state.imageURL,
         gpa: this.state.gpa,
-        campusId: this.state.campusid,
+        campusId: this.state.campusId,
     };
     
     // Add new student in back-end database
@@ -76,6 +75,7 @@ class NewStudentContainer extends Component {
       <div>
         <Header />
         <NewStudentView 
+          campusId = {this.props.location.query}
           handleChange = {this.handleChange} 
           handleSubmit={this.handleSubmit}      
         />

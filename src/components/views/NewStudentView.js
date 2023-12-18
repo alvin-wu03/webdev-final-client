@@ -6,6 +6,7 @@ It constructs a React component to display the new student page.
 ================================================== */
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Create styling for the input form
@@ -35,9 +36,18 @@ const useStyles = makeStyles( () => ({
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const { handleChange, handleSubmit, campusId } = props;
+  useEffect(() => {
+    if (campusId && campusId !== null) {
+      handleChange({
+        target: {
+          name: 'campusId',
+          value: campusId.campus_id,
+        },
+      });
+    }
+  }, [campusId, handleChange]);
   const classes = useStyles();
-
   // Render a New Student view with an input form
   return (
     <div>
@@ -77,10 +87,9 @@ const NewStudentView = (props) => {
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus ID: </label>
-            <input type="text" name="campusid" onChange={(e) => handleChange(e)} />
+            <input type="text" defaultValue={campusId && campusId.campus_id !== null ? campusId.campus_id : ''} name="campusId" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
-
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
