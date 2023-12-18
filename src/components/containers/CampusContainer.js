@@ -26,11 +26,12 @@ class CampusContainer extends Component {
     this.props.fetchCampus(this.props.match.params.id);
   }
 
-  handleDelete = async (event) => {
+  handleDelete = async () => {
     await this.props.deleteCampus(this.props.campus.id);
     this.setState({ redirect: true });
   }
 
+  // deletes a student from a campus
   deleteStudent = async (studentId) => {
     await this.props.deleteStudent(studentId);
     this.setState({ redirect: false });
